@@ -5,7 +5,6 @@ channels:
 dependencies:
   - abseil-cpp=20210324.2
   - altair=4.1.0
-  - appnope=0.1.2
   - argh=0.26.2
   - argon2-cffi=20.1.0
   - arrow-cpp=5.0.0
@@ -84,8 +83,6 @@ dependencies:
   - libev=4.33
   - libevent=2.1.10
   - libffi=3.3
-  - libgfortran=5.0.0
-  - libgfortran5=9.3.0
   - liblapack=3.9.0
   - libnghttp2=1.43.0
   - libopenblas=0.3.15
@@ -183,10 +180,12 @@ dependencies:
   - zlib=1.2.11
   - zstd=1.5.0
   - pip:
+    - appnope=0.1.2
     - blinker==1.4
     - doublemetaphone==0.1
     - en-core-web-sm==3.1.0
     - future==0.18.2
+    - libgfortran=5.0.0
     - pandas==1.1.5
     - probableparsing==0.0.1
     - probablepeople==0.5.4
