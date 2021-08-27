@@ -19,8 +19,6 @@ def get_table_download_link(df):
     return href
 
 def main():
-    if 'refresh_files' not in st.session_state: 
-        st.session_state['refresh_files'] = False 
     parser = EADParser()   
     st.title('Parse XML Files')
     menu = ["Parse File(s)"]
@@ -60,6 +58,5 @@ def main():
             else: 
                 st.warning("No .xml files detected! Please double check selected file(s) and ensure the extension on each file is .xml.")
         
-
 if __name__ == '__main__': 
     main()
