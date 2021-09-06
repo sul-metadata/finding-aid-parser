@@ -6,7 +6,7 @@ import glob
 import math
 import os
 from collections import defaultdict
-import spacy
+import spacy_streamlit
 import requests
 from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError
 import string
@@ -16,7 +16,7 @@ class EADParser:
     def __init__(self):
         self.wikidata_xml_mapping = {}
         self.namespace = ""
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy_streamlit.load_model("./models/en/")
 
     def clear_dict(self):
         self.wikidata_xml_mapping = {k : '' for k in self.wikidata_xml_mapping}
