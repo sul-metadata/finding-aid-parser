@@ -149,6 +149,7 @@ dependencies:
   - smart_open=5.1.0
   - smmap=4.0.0
   - snappy=1.1.8
+  - spacy=3.1.1
   - spacy-legacy=3.0.8
   - sqlite=3.36.0
   - srsly=2.4.1
@@ -192,8 +193,6 @@ dependencies:
     - pydeck==0.6.2
     - pyrsistent==0.18.0
     - python-crfsuite==0.9.7
-    - spacy==3.1.1
-    - spacy-streamlit==1.0.1
     - webencodings==0.5.1
     - https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz
 prefix: /Users/a/opt/miniconda3/envs/ars_environment
