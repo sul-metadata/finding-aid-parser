@@ -197,4 +197,5 @@ dependencies:
     - spacy==3.1.1
     - spacy-streamlit==1.0.1
     - webencodings==0.5.1
+    - https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz
 prefix: /Users/a/opt/miniconda3/envs/ars_environment
