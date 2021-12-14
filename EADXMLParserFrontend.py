@@ -36,22 +36,21 @@ def main():
         non_xml_files = [file.name for file in uploaded_files if os.path.splitext(file.name)[1] != ".xml"]
         
         if len(non_xml_files) > 0: 
-            invalid_file_warning = "Found non xml files (these will be ignored): " + ", ".join(non_xml_files)
+            invalid_file_warning = "Found non xml files! The following files will be ignored): " + ", ".join(non_xml_files)
             st.warning(invalid_file_warning)
 
         if st.button("Parse Files"): 
             if len(xml_files) > 0: 
-                has_parsed_files = True
                 parsed = []
                 progress_bar = st.progress(0)
                 step = 1/len(xml_files)
                 amount_done = 0
-
-                for i, file in enumerate(xml_files):
+                
+                for file in xml_files:
                     amount_done += step
                     parsed_file = parser.parse_xml_by_reference(file)
                     parsed.append(parsed_file)
-                    progress_bar.progress(amount_done)
+                    progress_bar.progress(round(amount_done, 1))
                 
                 combined_files = parser.combine_parsed_files(parsed)
                 df = pd.DataFrame.from_dict(combined_files)
