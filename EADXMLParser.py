@@ -27,30 +27,16 @@ class EADParser:
 
     def batch_parse_xml(self, files):
         parsed = []
-        if len(files) > 0: 
-            step = 10**math.floor(math.log10(len(files))) 
-        else: 
-            step = 1
         for i, file in enumerate(files):
-            if i % step == 0:
-                print('%s out of %s parsed' % (i, len(files)))
             parsed_file = self.parse_xml(file)
             parsed.append(parsed_file)
-        print('%s out of %s parsed' % (len(files), len(files)))
         return parsed
     
     def batch_parse_xml_by_reference(self, files): 
         parsed = []
-        if len(files) > 0: 
-            step = 10**math.floor(math.log10(len(files))) 
-        else: 
-            step = 1
         for i, file in enumerate(files):
-            if i % step == 0:
-                print('%s out of %s parsed' % (i, len(files)))
             parsed_file = self.parse_xml_by_reference(file)
             parsed.append(parsed_file)
-        print('%s out of %s parsed' % (len(files), len(files)))
         return parsed
     
     def parse_xml_by_reference(self, file): 
@@ -102,13 +88,10 @@ class EADParser:
         abstract = './/%sabstract' % (self.namespace)
         abstract_tag = root.findall(abstract)
         description = ""
-        print('ABSTRACT TAG: ', abstract_tag)
         for t in abstract_tag:
             for node in t.iter():
-                print('NODE TEXT: ', node.text)
                 description += node.text
         description = description.strip()
-        print("INITIAL DESCRIPTION: ", description)
         description = description.replace('\n', '').replace('\r', '')
         if description == "":
             description = self.get_alt_description(root)
@@ -119,7 +102,6 @@ class EADParser:
             first_sentence = sent
             break
         self.wikidata_xml_mapping['description'] = first_sentence
-        print('LOOK HERE: ', description, first_sentence)
         return (description, first_sentence)
 
     def get_title_and_label(self, root):
