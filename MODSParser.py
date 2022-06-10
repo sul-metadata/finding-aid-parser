@@ -6,7 +6,6 @@ import glob
 import math
 import os
 from collections import defaultdict
-import spacy_streamlit
 import requests
 from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError
 import string
