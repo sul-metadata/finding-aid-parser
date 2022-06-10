@@ -10,12 +10,14 @@ import spacy_streamlit
 import requests
 from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError
 import string
+import streamlit as st
 
-class EADParser:
+
+class FindingAidParser:
 
     def __init__(self):
         self.wikidata_xml_mapping = {}
-        self.namespace = ""
+        self.namespace = "{urn:isbn:1-931666-22-9}"
         self.nlp = spacy_streamlit.load_model("./models/en/")
 
     def clear_dict(self):
@@ -25,26 +27,31 @@ class EADParser:
         m = re.match(r'\{.*\}', element.tag)
         return m.group(0) if m else ''
 
-    def batch_parse_xml(self, files):
-        parsed = []
+    def batch_parse_xml(
+        self,
+        files,
+        show_progress=True, 
+        progress_bar=None, 
+        amount_done=0,
+        size=0):
+
+        parsed  = []
+        step = 1/size if size > 0 else 0
+
         for i, file in enumerate(files):
+            amount_done += step 
             parsed_file = self.parse_xml(file)
             parsed.append(parsed_file)
-        return parsed
+            if show_progress and progress_bar: progress_bar.progress(round(amount_done, 1))
+        finding_aid_info = self.combine_parsed_files(parsed)
+        return finding_aid_info     
     
-    def batch_parse_xml_by_reference(self, files): 
-        parsed = []
-        for i, file in enumerate(files):
-            parsed_file = self.parse_xml_by_reference(file)
-            parsed.append(parsed_file)
-        return parsed
-    
-    def parse_xml_by_reference(self, file): 
+    def parse_xml(self, file): 
         if file:
             self.clear_dict()
             xmlTree = ET.parse(file)
             root = xmlTree.getroot()
-            self.namespace = self.__get_namespace(root)
+            # self.namespace = self.__get_namespace(root)
             self.get_description(root)
             self.get_title_and_label(root)
             self.get_inventory_number(root, file)
@@ -54,14 +61,14 @@ class EADParser:
             res = self.wikidata_xml_mapping
         return res
 
-    def parse_xml(self, filepath):
+    def parse_xml_local(self, filepath):
         res = {}
         ext = os.path.splitext(filepath )[-1].lower()
         if ext == '.xml': 
             self.clear_dict()
             xmlTree = ET.parse(filepath)
             root = xmlTree.getroot()
-            self.namespace = self.__get_namespace(root)
+            # self.namespace = self.__get_namespace(root)
 
             self.get_description(root)
             self.get_title_and_label(root)
