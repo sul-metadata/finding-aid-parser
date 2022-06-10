@@ -94,9 +94,6 @@ class Parser:
             df = pd.DataFrame(r[1])
             st.markdown(self.get_table_download_link(df, r[0]+'.csv', r[0]), unsafe_allow_html=True)
 
-        print('mods res: ', mods_res)
-        print('marc res: ', marcs_res)
-        print('finding aid res: ', finding_aid_res)
     
     def get_table_download_link(self, df, filename, xml_type):
         """Generates a link allowing the data in a given panda dataframe to be downloaded
