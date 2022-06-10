@@ -45,4 +45,5 @@ dependencies:
     - streamlit==0.89.0
     - thinc==8.0.9
     - protobuf==3.20.*
+    - numpy-1.21.6
 prefix: /Users/a/opt/miniconda3/envs/ars_environment
